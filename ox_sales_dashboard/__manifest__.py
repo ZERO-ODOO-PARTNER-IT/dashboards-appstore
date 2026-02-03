@@ -34,7 +34,7 @@ Features:
             'sales_dashboard/static/src/components/**/*',
         ],
     },
-    'images': ['static/description/banner.svg'],
+    'images': ['static/description/banner.png'],
     'installable': True,
     'application': False,
     'auto_install': False,
