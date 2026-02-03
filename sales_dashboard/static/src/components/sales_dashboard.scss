@@ -1,0 +1,51 @@
+.o_sales_dashboard {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.o_sales_dashboard .card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.o_sales_dashboard .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.o_sales_dashboard .rounded-circle {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.o_sales_dashboard h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.o_sales_dashboard .table th {
+    font-weight: 600;
+    border-top: none;
+}
+
+.o_sales_dashboard .table td {
+    vertical-align: middle;
+}
+
+.o_sales_dashboard .badge {
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+}
+
+.o_sales_dashboard .card-header h5 {
+    font-weight: 600;
+    color: #495057;
+}
+
+.o_sales_dashboard .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
