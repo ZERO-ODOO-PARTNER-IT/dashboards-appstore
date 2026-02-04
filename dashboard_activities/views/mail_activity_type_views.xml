@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Mail Activity Type List View -->
+    <record id="mail_activity_type_view_list" model="ir.ui.view">
+        <field name="name">mail.activity.type.view.list.dashboard</field>
+        <field name="model">mail.activity.type</field>
+        <field name="arch" type="xml">
+            <list string="Activity Types">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="category"/>
+                <field name="delay_count"/>
+                <field name="delay_unit"/>
+                <field name="icon"/>
+                <field name="decoration_type"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Mail Activity Type Form View -->
+    <record id="mail_activity_type_view_form" model="ir.ui.view">
+        <field name="name">mail.activity.type.view.form.dashboard</field>
+        <field name="model">mail.activity.type</field>
+        <field name="arch" type="xml">
+            <form string="Activity Type">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Phone Call"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Activity Settings">
+                            <field name="category"/>
+                            <field name="summary"/>
+                            <field name="res_model" groups="base.group_no_one"/>
+                        </group>
+                        <group string="Scheduling">
+                            <label for="delay_count"/>
+                            <div class="o_row">
+                                <field name="delay_count"/>
+                                <field name="delay_unit"/>
+                                <field name="delay_from"/>
+                            </div>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Appearance">
+                            <field name="icon"/>
+                            <field name="decoration_type"/>
+                        </group>
+                        <group string="Default User">
+                            <field name="default_user_id"/>
+                            <field name="keep_done"/>
+                        </group>
+                    </group>
+                    <group string="Next Activity" groups="base.group_no_one">
+                        <field name="chaining_type"/>
+                        <field name="triggered_next_type_id" invisible="chaining_type != 'trigger'"/>
+                        <field name="suggested_next_type_ids" widget="many2many_tags" invisible="chaining_type != 'suggest'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Mail Activity Type Search View -->
+    <record id="mail_activity_type_view_search" model="ir.ui.view">
+        <field name="name">mail.activity.type.view.search.dashboard</field>
+        <field name="model">mail.activity.type</field>
+        <field name="arch" type="xml">
+            <search string="Search Activity Types">
+                <field name="name"/>
+                <field name="category"/>
+                <separator/>
+                <filter string="Default" name="default" domain="[('category', '=', 'default')]"/>
+                <filter string="Meetings" name="meeting" domain="[('category', '=', 'meeting')]"/>
+                <filter string="Phone Calls" name="phonecall" domain="[('category', '=', 'phonecall')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Category" name="group_category" context="{'group_by': 'category'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Mail Activity Type Action -->
+    <record id="mail_activity_type_action" model="ir.actions.act_window">
+        <field name="name">Activity Types</field>
+        <field name="res_model">mail.activity.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="mail_activity_type_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No activity types defined
+            </p>
+            <p>
+                Activity types are used to categorize activities. You can define specific scheduling and appearance settings for each type.
+            </p>
+        </field>
+    </record>
+</odoo>

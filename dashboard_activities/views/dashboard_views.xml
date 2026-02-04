@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Activities Dashboard Action -->
+    <record id="activities_dashboard_action" model="ir.actions.act_window">
+        <field name="name">Activities Dashboard</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">graph,pivot,kanban,calendar,list,form</field>
+        <field name="search_view_id" ref="mail_activity_view_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No activities to display
+            </p>
+            <p>
+                This dashboard provides an overview of all activities in the system.
+            </p>
+        </field>
+    </record>
+
+    <!-- Dashboard Graph View -->
+    <record id="activities_dashboard_view_graph" model="ir.ui.view">
+        <field name="name">mail.activity.dashboard.graph</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <graph string="Activities Dashboard" type="bar" sample="1" stacked="0">
+                <field name="user_id"/>
+                <field name="activity_type_id" type="col"/>
+                <field name="id" type="measure" string="Count"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Dashboard Pivot View -->
+    <record id="activities_dashboard_view_pivot" model="ir.ui.view">
+        <field name="name">mail.activity.dashboard.pivot</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <pivot string="Activities Dashboard" sample="1">
+                <field name="user_id" type="row"/>
+                <field name="activity_type_id" type="col"/>
+                <field name="state" type="col"/>
+                <field name="id" type="measure" string="Count"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Dashboard View Sequence -->
+    <record id="activities_dashboard_action_view_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="activities_dashboard_view_graph"/>
+        <field name="act_window_id" ref="activities_dashboard_action"/>
+    </record>
+
+    <record id="activities_dashboard_action_view_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="activities_dashboard_view_pivot"/>
+        <field name="act_window_id" ref="activities_dashboard_action"/>
+    </record>
+
+    <record id="activities_dashboard_action_view_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="mail_activity_view_kanban"/>
+        <field name="act_window_id" ref="activities_dashboard_action"/>
+    </record>
+
+    <record id="activities_dashboard_action_view_calendar" model="ir.actions.act_window.view">
+        <field name="sequence" eval="4"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="mail_activity_view_calendar"/>
+        <field name="act_window_id" ref="activities_dashboard_action"/>
+    </record>
+
+    <record id="activities_dashboard_action_view_list" model="ir.actions.act_window.view">
+        <field name="sequence" eval="5"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="mail_activity_view_list"/>
+        <field name="act_window_id" ref="activities_dashboard_action"/>
+    </record>
+
+    <record id="activities_dashboard_action_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="6"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mail_activity_view_form"/>
+        <field name="act_window_id" ref="activities_dashboard_action"/>
+    </record>
+
+    <!-- My Activities Dashboard Action (Filtered) -->
+    <record id="my_activities_dashboard_action" model="ir.actions.act_window">
+        <field name="name">My Activities Overview</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">kanban,calendar,list,form</field>
+        <field name="search_view_id" ref="mail_activity_view_search"/>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="context">{'search_default_my_activities': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                You have no activities assigned
+            </p>
+            <p>
+                Activities will appear here when they are assigned to you.
+            </p>
+        </field>
+    </record>
+
+    <!-- Overdue Activities Action -->
+    <record id="overdue_activities_action" model="ir.actions.act_window">
+        <field name="name">Overdue Activities</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="mail_activity_view_search"/>
+        <field name="context">{'search_default_overdue': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No overdue activities
+            </p>
+            <p>
+                Great! All activities are on schedule.
+            </p>
+        </field>
+    </record>
+
+    <!-- Today's Activities Action -->
+    <record id="today_activities_action" model="ir.actions.act_window">
+        <field name="name">Today's Activities</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="mail_activity_view_search"/>
+        <field name="context">{'search_default_today': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No activities due today
+            </p>
+            <p>
+                You're all caught up for today!
+            </p>
+        </field>
+    </record>
+</odoo>

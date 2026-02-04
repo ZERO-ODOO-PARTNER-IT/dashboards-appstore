@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem
+        id="menu_activities_dashboard_root"
+        name="Activities Dashboard"
+        sequence="50"
+        web_icon="dashboard_activities,static/description/icon.png"
+        groups="group_activities_user"/>
+
+    <!-- Activities Menu -->
+    <menuitem
+        id="menu_activities"
+        name="Activities"
+        parent="menu_activities_dashboard_root"
+        action="mail_activity_action"
+        sequence="10"/>
+
+    <!-- Dashboard Menu -->
+    <menuitem
+        id="menu_dashboard"
+        name="Dashboard"
+        parent="menu_activities_dashboard_root"
+        action="activities_dashboard_action"
+        sequence="20"/>
+
+    <!-- Quick Access Submenus -->
+    <menuitem
+        id="menu_quick_access"
+        name="Quick Access"
+        parent="menu_activities_dashboard_root"
+        sequence="30"/>
+
+    <menuitem
+        id="menu_my_activities"
+        name="My Activities"
+        parent="menu_quick_access"
+        action="my_activities_dashboard_action"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_overdue_activities"
+        name="Overdue"
+        parent="menu_quick_access"
+        action="overdue_activities_action"
+        sequence="20"/>
+
+    <menuitem
+        id="menu_today_activities"
+        name="Today"
+        parent="menu_quick_access"
+        action="today_activities_action"
+        sequence="30"/>
+
+    <!-- Configuration Menu -->
+    <menuitem
+        id="menu_configuration"
+        name="Configuration"
+        parent="menu_activities_dashboard_root"
+        sequence="100"
+        groups="group_activities_manager"/>
+
+    <menuitem
+        id="menu_activity_types"
+        name="Activity Types"
+        parent="menu_configuration"
+        action="mail_activity_type_action"
+        sequence="10"/>
+</odoo>
