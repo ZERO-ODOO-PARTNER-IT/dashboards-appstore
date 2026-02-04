@@ -28,6 +28,9 @@ This module provides a comprehensive dashboard for managing mail activities with
         "views/dashboard_views.xml",
         "views/menus.xml",
     ],
+    "images": [
+        "static/description/banner.png",
+    ],
     "installable": True,
     "application": True,
     "price": 29,
